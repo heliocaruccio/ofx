@@ -110,12 +110,12 @@ module OFX
         date = "#{year}-#{month}-#{day} "
         date << "#{hour}:#{minutes}:#{seconds}" if hour && minutes && seconds
 
-        Time.parse(date)
+        Time.parse(date) rescue nil
       end
 
       def build_balance
         amount = html.search("ledgerbal > balamt").inner_text.to_f
-        posted_at = build_date(html.search("ledgerbal > dtasof").inner_text) rescue nil
+        posted_at = build_date(html.search("ledgerbal > dtasof").inner_text)
 
         OFX::Balance.new({
           :amount => amount,
