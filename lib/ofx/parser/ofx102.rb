@@ -60,7 +60,7 @@ module OFX
           :id                => node.search("bankacctfrom > acctid, ccacctfrom > acctid").inner_text,
           :type              => ACCOUNT_TYPES[node.search("bankacctfrom > accttype").inner_text.to_s.upcase],
           :transactions      => build_transactions(node),
-          :balance           => build_balance(node),
+          :balance           => build_balance,
           :available_balance => build_available_balance(node),
           :currency          => node.search("stmtrs > curdef, ccstmtrs > curdef").inner_text
         })
